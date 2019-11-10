@@ -25,7 +25,6 @@ class DatabaseClient {
       const samples: Array<string> = Object.keys(this.database)  
       const newCol: string = this._randId()
       samples.forEach(s=>this.database[s][newCol]=0)
-      console.log(this.database)
   }
 
   // only the sample name
