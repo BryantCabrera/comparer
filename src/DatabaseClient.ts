@@ -11,6 +11,15 @@ class DatabaseClient {
     return Object.keys(Object.entries(this.database)[0][1]);
   }
 
+  getRows():Array<Array<string>>{
+    return Object.entries(this.database)
+      .map(array => [array[0], ...this._values(array[1])])
+  }
+
+  _values(obj:LooseObject):Array<string>{
+    const keys:Array<string> = Object.keys(obj);
+    return keys.map(k => obj[k])
+  }
   _randId():string{
     return Math.random().toString(36).substring(2,8) 
   }
