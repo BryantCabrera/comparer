@@ -25,18 +25,20 @@ const Slider: React.FC = () => {
   let [cx, setCx] = useState("5");
 
   return (
-    <div>
-      <svg width="300" height="10">
-        <rect
-          y="5"
-          width="300"
-          height="2"
-          rx="10"
-          ry="10"
-          style={{ fill: "rgb(96,125,139)" }}
-        />
-      </svg>
-      <div draggable={true} onDrag={() => console.log("boob")}>
+    <div style={{position: "relative"}}>
+      <div style={{position: "absolute", left:"30%", top:"0"}}>
+        <svg width="300" height="10">
+          <rect
+            y="5"
+            width="300"
+            height="2"
+            rx="10"
+            ry="10"
+            style={{ fill: "rgb(96,125,139)" }}
+          />
+        </svg>
+      </div>
+      <div draggable={true} onDrag={() => console.log("boob")} style={{position:"absolute", left:"30%", top:"0"}}>
         <svg width="10" height="10">
           <circle
             cx={cx}
