@@ -38,7 +38,7 @@ const Slider: React.FC = () => {
           />
         </svg>
       </div>
-      <div draggable={true} onDrag={() => console.log("boob")} style={{position:"absolute", left:"30%", top:"0"}}>
+      <div draggable={true} onDrag={() => console.log("draggin")} style={{position:"absolute", left:"30%", top:"0"}}>
         <svg width="10" height="10">
           <circle
             cx={cx}
