@@ -1,4 +1,4 @@
-import React, { Dispatch, MouseEvent, SetStateAction, useState } from "react";
+import React, { Dispatch, MouseEvent, RefObject, SetStateAction, useRef, useState } from "react";
 
 const onMouseDown = (
   event: MouseEvent,
@@ -21,8 +21,19 @@ const onMouseDown = (
   document.addEventListener("mouseup", onMouseUp);
 };
 
+const setPosition = (ref: RefObject<HTMLDivElement>, event: any) => {
+    if(ref.current){
+     const initX: number = ref.current.offsetLeft;
+     const clientX: number = event.clientX; 
+
+     const deltaX: number = clientX - initX
+     console.log(clientX)
+     ref.current.style.left = (initX + deltaX).toString() + 'px' 
+    }
+}
+
 const Slider: React.FC = () => {
-  let [cx, setCx] = useState("5");
+  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <div style={{position: "relative"}}>
@@ -38,10 +49,10 @@ const Slider: React.FC = () => {
           />
         </svg>
       </div>
-      <div draggable={true} onDrag={() => console.log("draggin")} style={{position:"absolute", left:"30%", top:"0"}}>
+      <div ref={ref} draggable={true} onDrag={(event) => setPosition(ref, event)} style={{position:"absolute", left:"30%", top:"0"}}>
         <svg width="10" height="10">
           <circle
-            cx={cx}
+            cx="5"
             cy="0"
             r="4"
             onDrag={(e: MouseEvent) => console.log("draggedme")}
