@@ -7,7 +7,15 @@ import Slider from "./Slider";
 const App: React.FC = () => {
   const client = new DatabaseClient();
   return (
-    <div style={{ margin: "100px", position: "absolute", width: '100%', height: '100%' }} className="App">
+    <div
+      style={{
+        margin: "100px",
+        position: "absolute",
+        width: "100%",
+        height: "100%"
+      }}
+      className="App"
+    >
       <Slider />
     </div>
   );
