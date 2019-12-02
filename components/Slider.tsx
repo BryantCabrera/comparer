@@ -10,11 +10,7 @@ import React, {
 
 const Slider: React.FC = () => {
   const [x, setX] = useState(null);
-  return (
-   <input 
-      type="range"
-    />
-  )
+  return <input type="range" />;
 };
 
 export default Slider;

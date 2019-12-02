@@ -1,26 +1,46 @@
-import React, { Fragment } from "react";
-import DatabaseClient from "./DatabaseClient";
-import Tablet from "./Tablet";
+import React, { Fragment, useState } from "react";
 
-const Table: React.FC = () => {
-  const client = new DatabaseClient();
-  let columns: Array<string> = ["column names"];
-  columns.push(...client.getColumns());
+const Headers: React.FC<{ colNames: Array<string> }> = ({ colNames }) => {
+  colNames = [""].concat(colNames);
+  return (
+    <tr>
+      {colNames.map(c => (
+        <th key={`header-${c}`}> {c} </th>
+      ))}
+    </tr>
+  );
+};
 
-  const rows: Array<Array<string>> = client.getRows();
+const Rows: React.FC<{ data: any }> = ({ data }) => {
+  const [rowNames, setName] = useState(["s1"]);
+  const columns = Object.keys(data);
   return (
     <Fragment>
-      <div style={{ display: "flex" }}>
-        {columns.map(colName => (
-          <Tablet value={colName} />
-        ))}
-      </div>
-      <div style={{ display: "flex" }}>
-        {rows.map(row => {
-          return row.map(e => <Tablet value={e} />);
-        })}
-      </div>
+      {rowNames.map((r, index) => {
+        return (
+          <tr key={`row-$r`}>
+            {columns.map(c => (
+              <td key={`cell-${r}${c}`}> {data[c][index]}</td>
+            ))}
+          </tr>
+        );
+      })}
     </Fragment>
+  );
+};
+
+const Table: React.FC<{ state: any }> = ({ state }) => {
+  return (
+    <table>
+      <Fragment>
+        <thead>
+        <Headers colNames={Object.keys(state)} />
+        </thead>
+        <tbody>
+        <Rows data={state} />
+        </tbody>
+      </Fragment>
+    </table>
   );
 };
 

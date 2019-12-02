@@ -1,14 +1,17 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./App.css";
 import Table from "./Table";
-import DatabaseClient from "./DatabaseClient";
+import getStateAndDispatcher from "./models/Database";
 import Slider from "./Slider";
 
 const App: React.FC = () => {
-  const client = new DatabaseClient();
+  const { state, dispatcher } = getStateAndDispatcher();
+
   return (
     <div
+      id="app"
       style={{
+        display: "flex",
         margin: "100px",
         position: "absolute",
         width: "100%",
@@ -16,7 +19,12 @@ const App: React.FC = () => {
       }}
       className="App"
     >
-      <Slider />
+      <Fragment>
+        <div id="table-div">
+          <Table state={state} />
+        </div>
+        <div id="sliders"></div>
+      </Fragment>
     </div>
   );
 };
