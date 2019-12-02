@@ -7,6 +7,7 @@ import Slider from "./Slider";
 const App: React.FC = () => {
   const { state, dispatcher } = getStateAndDispatcher();
 
+  console.log('in App: ', state)
   return (
     <div
       id="app"
@@ -23,7 +24,9 @@ const App: React.FC = () => {
         <div id="table-div">
           <Table state={state} />
         </div>
-        <div id="sliders"></div>
+        <div id="sliders">
+          <Slider databaseDispatcher={dispatcher} />
+        </div>
       </Fragment>
     </div>
   );

@@ -34,10 +34,10 @@ const Table: React.FC<{ state: any }> = ({ state }) => {
     <table>
       <Fragment>
         <thead>
-        <Headers colNames={Object.keys(state)} />
+          <Headers colNames={Object.keys(state)} />
         </thead>
         <tbody>
-        <Rows data={state} />
+          <Rows data={state} />
         </tbody>
       </Fragment>
     </table>
