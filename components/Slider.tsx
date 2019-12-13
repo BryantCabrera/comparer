@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
+import Database from './models/Database';
 
 const useEventHandler = (initialState: any, dispatcher: any) => {
   const [value, setValue] = useState(initialState);
@@ -10,20 +11,15 @@ const useEventHandler = (initialState: any, dispatcher: any) => {
   return { value, handleChange };
 };
 
-const Slider: React.FC<{ databaseDispatcher: any }> = ({
-  databaseDispatcher
-}) => {
-  const { value, handleChange } = useEventHandler(
-    { score: 51 },
-    databaseDispatcher
-  );
+const Slider: React.FC<{}> = () => {
+  const { state, dispatch } = useContext(Database);
   return (
     <input
       type="range"
       min="0"
       max="100"
-      value={value.score}
-      onChange={handleChange}
+      value={state['d1']['0']}
+      onChange={(e)=> dispatch(state, {colName: 'd1', rowNumber: '0', value: e.target.value})}
     />
   );
 };

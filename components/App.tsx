@@ -1,13 +1,25 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useReducer } from "react";
 import "./App.css";
+import Database from "./models/Database";
 import Table from "./Table";
-import getStateAndDispatcher from "./models/Database";
 import Slider from "./Slider";
 
-const App: React.FC = () => {
-  const { state, dispatcher } = getStateAndDispatcher();
+const _has = (value: any) => {
+  return value !== "" && value !== null && value !== undefined;
+};
+const _reducer = (state: any, action: any) => {
+  console.log('state', console.log(state))
+  console.log('action', console.log(action))
+  if ([action.colName, action.rowNumber, action.value].every(v => _has(v))) {
+    const colName = action.colName;
+    const rowNumber = action.rowNumber;
+    state[colName][rowNumber] = action.value;
+  }
+  return state;
+};
 
-  console.log('in App: ', state)
+const App: React.FC = () => {
+  const [state, dispatch] = useReducer(_reducer, {'d1':[14]}) 
   return (
     <div
       id="app"
@@ -20,14 +32,16 @@ const App: React.FC = () => {
       }}
       className="App"
     >
+      <Database.Provider value={{state, dispatch}}>
       <Fragment>
         <div id="table-div">
-          <Table state={state} />
+          <Table />
         </div>
         <div id="sliders">
-          <Slider databaseDispatcher={dispatcher} />
+          <Slider />
         </div>
       </Fragment>
+      </Database.Provider>
     </div>
   );
 };

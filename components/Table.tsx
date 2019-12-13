@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
+import Database from "./models/Database";
 
 const Headers: React.FC<{ colNames: Array<string> }> = ({ colNames }) => {
   colNames = [""].concat(colNames);
@@ -29,7 +30,8 @@ const Rows: React.FC<{ data: any }> = ({ data }) => {
   );
 };
 
-const Table: React.FC<{ state: any }> = ({ state }) => {
+const Table: React.FC<{}> = () => {
+  const {state} = useContext(Database)
   return (
     <table>
       <Fragment>
