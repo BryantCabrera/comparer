@@ -33,5 +33,9 @@ rows['sample'][columns['dimension1']]
 
 For now I will just use a simple slider input.
 
+*Actual Implementation*
+I had tried to implement this by keeping the state in a `TableModel` and `SliderModel`. To keep the states and update. But this just 
+seems like a roundabout way to use class components. So I deleted those. I also opted not to use the Context API for now, given that what I need to do is simple, and I do not need to get ahead of myself. Phase I is done. There is a simple slider and a simple table, if you can call it that, whose value changes with the slider.
+
 
 
