@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import * as TableModel from "./models/TableModel";
 
 const Row = props => {
   return (
