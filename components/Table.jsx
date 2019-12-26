@@ -24,14 +24,14 @@ const Columns = props => {
 };
 
 const Table = props => {
-  const {valSetValsObj} = props
-  
-  const columnNames = Object.keys(valSetValsObj) // [0, 1, 2, ..]
-  const rowVals = Object.values(valSetValsObj).map( ar => ar[0] ) // [value1, value2, ...]
+  const { valSetValsObj } = props;
+
+  const columnNames = Object.keys(valSetValsObj); // [0, 1, 2, ..]
+  const rowVals = Object.values(valSetValsObj).map(ar => ar[0]); // [value1, value2, ...]
   const rows = { sample: [rowVals] };
-  const columns = columnNames.reduce((acc, colName, index)=>{
-     acc[colName] = index  // {0: 0, 1:1, ...}
-     return acc
+  const columns = columnNames.reduce((acc, colName, index) => {
+    acc[colName] = index; // {0: 0, 1:1, ...}
+    return acc;
   }, {});
 
   return (
