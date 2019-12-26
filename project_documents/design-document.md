@@ -46,4 +46,15 @@ seems like a roundabout way to use class components. So I deleted those. I also 
 We need five dimensions with the same functionality. I will hardcode five dimensions in the App and pass an object of `[value, setValues]` to the `Table` and `Slider`s
 
 *Actual Implementation*
-I did pretty much what I thought of in the _Designed Implementation_; styling is below substandard, but the functionality is there.
+As designed
+
+### Phase III
+*Requirements*:
+
+Make a slider with multiple dials
+
+*Designed Implementation*:
+I will add another sample to be able to test the multiple dials on the slider. I am planning on searching what there is online for a multi dial slider and reuse that.
+
+*Actual Implementation*:
+Found this really awesome librar `react-compound-slider` [here](https://github.com/sghall/react-compound-slider). I have used it that.
