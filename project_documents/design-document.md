@@ -58,3 +58,12 @@ I will add another sample to be able to test the multiple dials on the slider. I
 
 *Actual Implementation*:
 Found this really awesome librar `react-compound-slider` [here](https://github.com/sghall/react-compound-slider). I have used it that.
+
+### Phase IV
+*Requirements*:
+
+Implement the ability to add and remove samples
+
+*Designed Implementation*:
+My data structure is column oriented. So I will add `Add` and `Remove` buttons that will, on click, push or pop one sample per column.Some code DRY-ing is in order. I will DRY up after Phase V that will also use some of this logic.
+
