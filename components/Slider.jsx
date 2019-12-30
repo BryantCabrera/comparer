@@ -56,12 +56,12 @@ const Handle = ({ handle: { id, value, percent }, getHandleProps }) => {
 
 const MultiHandleSlider = props => {
   const { stateKey, state, setState } = props;
-  const values = state[stateKey] 
+  const values = state[stateKey];
   const handleChange = vs => {
-    const newState = {...state}
-    newState[stateKey] = vs
-    setState(newState)
-  }
+    const newState = { ...state };
+    newState[stateKey] = vs;
+    setState(newState);
+  };
   return (
     <Slider
       rootStyle={sliderStyle}
@@ -93,7 +93,14 @@ const Sliders = props => {
   const { state, setState } = props;
   return Object.keys(state).map((key, index) => {
     // key=0 or 1 state={0: [50, 40], 1:[30, 20], ...}
-    return <MultiHandleSlider key={index} stateKey={key} state={state} setState={setState} />;
+    return (
+      <MultiHandleSlider
+        key={index}
+        stateKey={key}
+        state={state}
+        setState={setState}
+      />
+    );
   });
 };
 

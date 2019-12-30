@@ -27,7 +27,7 @@ const Table = props => {
   const { state } = props;
 
   const columnNames = Object.keys(state); // [0, 1, 2, ..]
-  const rowVals = Object.values(state) // [[value1, value2], ...]
+  const rowVals = Object.values(state); // [[value1, value2], ...]
   // TODO: this part is wrong fix it. there is one
   // row name
   const rows = { sample: [rowVals] };
