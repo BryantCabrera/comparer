@@ -64,7 +64,6 @@ const AddDimension = props => {
         50
       )
     };
-    console.log(newState);
     setState(newState);
   };
   return <button onClick={handleClick}>Add Dimension</button>;
