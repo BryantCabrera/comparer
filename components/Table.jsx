@@ -24,10 +24,12 @@ const Columns = props => {
 };
 
 const Table = props => {
-  const { valSetValsObj } = props;
+  const { state } = props;
 
-  const columnNames = Object.keys(valSetValsObj); // [0, 1, 2, ..]
-  const rowVals = Object.values(valSetValsObj).map(ar => ar[0]); // [value1, value2, ...]
+  const columnNames = Object.keys(state); // [0, 1, 2, ..]
+  const rowVals = Object.values(state) // [[value1, value2], ...]
+  // TODO: this part is wrong fix it. there is one
+  // row name
   const rows = { sample: [rowVals] };
   const columns = columnNames.reduce((acc, colName, index) => {
     acc[colName] = index; // {0: 0, 1:1, ...}

@@ -67,3 +67,9 @@ Implement the ability to add and remove samples
 *Designed Implementation*:
 My data structure is column oriented. So I will add `Add` and `Remove` buttons that will, on click, push or pop one sample per column.Some code DRY-ing is in order. I will DRY up after Phase V that will also use some of this logic.
 
+*Actual Implementation*:
+I ended up completely changing the data structure. In the pervious format, where each row was a state with its own dispatcher, the 
+sliders had a nice API yes, but I would have needed to wrap those useStates, in another useState, because in the `init` function, I had each column return a `[values, setValues]` use `useState`, so if I wanted to update the object keys, the columns, I would need a `useState` for that. That would make things complicated, even if I could make it work, which I did not spend much time on. 
+
+Now, even though the whole state is updated and passed on, I don't think it is big enough to be a concern yet. Plus, it makes updating
+the names of samples and columns easier later on, now that columns and rows work with the same state data structure.
