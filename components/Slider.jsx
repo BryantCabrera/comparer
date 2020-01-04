@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Slider, Handles } from "react-compound-slider";
+import { Slider, Handles } from "../react-compound-slider/src";
 
 const SliderPropsComponent = (value, setValue) => {
   return {
@@ -57,18 +57,29 @@ const Handle = ({ handle: { id, value, percent }, getHandleProps }) => {
 const MultiHandleSlider = props => {
   const { stateKey, state, setState } = props;
   const values = state[stateKey];
-  const handleChange = vs => {
+
+  const handleChange = (newHandles, activeHandleID) => {
+    const updatedHandle = newHandles.filter(h => h.key == activeHandleID)[0];
+
+    const newValues = values.map(h => {
+      h.value =
+        h.key == updatedHandle.metadata.key
+          ? (h.value = updatedHandle.val)
+          : h.value;
+      return h;
+    });
     const newState = { ...state };
-    newState[stateKey] = vs;
+    newState[stateKey] = newValues;
     setState(newState);
   };
+
   return (
     <Slider
       rootStyle={sliderStyle}
       step={1}
       domain={[0, 100]}
       values={values}
-      onChange={vs => handleChange(vs)}
+      onSlideEnd={(vs, { activeHandleID }) => handleChange(vs, activeHandleID)}
     >
       <div style={railStyle} />
       <Handles>
@@ -91,17 +102,22 @@ const MultiHandleSlider = props => {
 
 const Sliders = props => {
   const { state, setState } = props;
-  return Object.keys(state).map((key, index) => {
-    // key=0 or 1 state={0: [50, 40], 1:[30, 20], ...}
-    return (
-      <MultiHandleSlider
-        key={index}
-        stateKey={key}
-        state={state}
-        setState={setState}
-      />
-    );
-  });
+
+  return (
+    <div className="sliders">
+      {Object.keys(state).map((key, index) => {
+        // key=0 or 1 state={0: [50, 40], 1:[30, 20], ...}
+        return (
+          <MultiHandleSlider
+            key={index}
+            stateKey={key}
+            state={state}
+            setState={setState}
+          />
+        );
+      })}
+    </div>
+  );
 };
 
 export default Sliders;

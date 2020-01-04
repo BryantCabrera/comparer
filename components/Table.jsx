@@ -2,11 +2,11 @@ import React, { Fragment } from "react";
 
 const Row = props => {
   return (
-    <div className="row">
+    <div>
       <Fragment>
         <p> {props.rowName} </p>
         {props.rowValues.map((score, index) => (
-          <p key={index}> {score} </p>
+          <p key={index}> {score.value} </p>
         ))}
       </Fragment>
     </div>
@@ -14,8 +14,8 @@ const Row = props => {
 };
 
 const Rows = props => {
-  return Object.entries(props.rows).map(([rowName, rowValues], index) => (
-    <Row key={index} rowName={rowName} rowValues={rowValues} />
+  return props.rows.map((row, index) => (
+    <Row key={index} rowName={`Sample ${index}`} rowValues={row} />
   ));
 };
 
@@ -27,20 +27,19 @@ const Table = props => {
   const { state } = props;
 
   const columnNames = Object.keys(state); // [0, 1, 2, ..]
-  const rowVals = Object.values(state); // [[value1, value2], ...]
-  // TODO: this part is wrong fix it. there is one
-  // row name
-  const rows = { sample: [rowVals] };
+  const rows = Object.values(state); // [value1, value2, ...]
   const columns = columnNames.reduce((acc, colName, index) => {
     acc[colName] = index; // {0: 0, 1:1, ...}
     return acc;
   }, {});
 
   return (
-    <Fragment>
-      <Columns columns={columns} />
-      <Rows rows={rows} />
-    </Fragment>
+    <div className="table">
+      <Fragment>
+        <Columns columns={columns} />
+        <Rows rows={rows} />
+      </Fragment>
+    </div>
   );
 };
 

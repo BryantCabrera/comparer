@@ -4,7 +4,9 @@ import Table from "./Table";
 import "./App.css";
 
 const init = (numDimensions, numSamples) => {
-  const samples = new Array(numSamples).fill(50);
+  const samples = new Array(numSamples).fill(50).map((e, i) => {
+    return { key: i, value: e };
+  });
   return useState(
     new Array(numDimensions)
       .fill(0) // [0, 0, 0]
@@ -23,13 +25,13 @@ const AddSample = props => {
     const newState = {};
     Object.keys(state).forEach(key => {
       const val = [...state[key]];
-      val.push(50);
+      val.push({ key: state[key].length, value: 50 });
       newState[key] = val;
     });
     setState(newState);
   };
   return (
-    <button onClick={handleClick} type="button">
+    <button onClick={handleClick} className="buttons add-sample" type="button">
       {" "}
       Add Sample{" "}
     </button>
@@ -47,7 +49,11 @@ const RemoveSample = props => {
     setState(newState);
   };
   return (
-    <button onClick={handleClick} type="button">
+    <button
+      onClick={handleClick}
+      className="buttons remove-sample"
+      type="button"
+    >
       {" "}
       Remove Sample{" "}
     </button>
@@ -60,13 +66,19 @@ const AddDimension = props => {
     const sampleArrayOfValues = Object.values(state)[0] || [];
     const newState = {
       ...state,
-      [Object.keys(state).length]: new Array(sampleArrayOfValues.length).fill(
-        50
-      )
+      [Object.keys(state).length]: new Array(sampleArrayOfValues.length)
+        .fill(50)
+        .map((e, index) => {
+          return { key: index, value: e };
+        })
     };
     setState(newState);
   };
-  return <button onClick={handleClick}>Add Dimension</button>;
+  return (
+    <button className="buttons add-dimension" onClick={handleClick}>
+      Add Dimension
+    </button>
+  );
 };
 
 const RemoveDimension = props => {
@@ -76,21 +88,29 @@ const RemoveDimension = props => {
     lastKey ? delete state[lastKey] : null;
     setState({ ...state });
   };
-  return <button onClick={handleClick}>Remove Dimension</button>;
+  return (
+    <button className="buttons remove-dimension" onClick={handleClick}>
+      Remove Dimension
+    </button>
+  );
 };
 
 const App = () => {
   // {0 : [50, dispatcher] ...}
   const [state, setState] = init(3, 2);
   return (
-    <Fragment>
-      <Table state={state} />
-      <AddSample state={state} setState={setState} />
-      <RemoveSample state={state} setState={setState} />
-      <AddDimension state={state} setState={setState} />
-      <RemoveDimension state={state} setState={setState} />
-      <Sliders state={state} setState={setState} />
-    </Fragment>
+    <div className="container">
+      <Fragment>
+        <Table state={state} />
+        <div className="buttons-container">
+          <AddSample state={state} setState={setState} />
+          <RemoveSample state={state} setState={setState} />
+          <AddDimension state={state} setState={setState} />
+          <RemoveDimension state={state} setState={setState} />
+        </div>
+        <Sliders state={state} setState={setState} />
+      </Fragment>
+    </div>
   );
 };
 

@@ -1,10 +1,58 @@
-.App {
-  text-align: center;
+.root {
+  --numSliders: 3;
+}
+.container {
+ display: grid;
+ grid-template-columns: 50% 50%;
+ grid-template-rows: 90% 10%;
+ font-family: roboto
 }
 
-.row {
-  display: grid
-  
+.table {
+    grid-column: 1;
+    display: grid
+}
+
+.sliders {
+    grid-column:2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-template-columns: 1;
+    display: grid;
+}
+
+.slider {
+  grid-column: 1;
+}
+
+.buttons-container {
+   display: grid;
+   grid-column: 1;
+   grid-row: 2;
+   grid-template-columns: 4;
+   grid-template-rows: 1;
+}
+
+.buttons {
+  background: white;
+  font-family: roboto;
+  font-size: 14px
+}
+
+.add-sample {
+  grid-column: 1
+}
+
+.remove-sample {
+  grid-column: 2
+}
+
+.add-dimension {
+  grid-column: 3
+}
+
+.remove-dimension {
+  grid-column: 4
 }
 
 body {
