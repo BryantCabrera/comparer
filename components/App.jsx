@@ -3,6 +3,8 @@ import Sliders from "./Slider";
 import Table from "./Table";
 import "./App.css";
 
+const deepCopy = arrayOfObj => JSON.parse(JSON.stringify(arrayOfObj));
+
 const init = (numDimensions, numSamples) => {
   const samples = new Array(numSamples).fill(50).map((e, i) => {
     return { key: i, value: e };
@@ -10,9 +12,9 @@ const init = (numDimensions, numSamples) => {
   return useState(
     new Array(numDimensions)
       .fill(0) // [0, 0, 0]
-      .map(ar => samples) // [[[50, 40], dispatcher], [...], [...]]
+      .map(_ => deepCopy(samples)) // [[50, 50, 50], [...], [...]]
       .reduce((acc, vals, index) => {
-        // {0: [[50, 40], dispatcher], 1: ...}
+        // {0: [50, 50], ...}
         acc[index] = vals;
         return acc;
       }, {})
@@ -96,7 +98,7 @@ const RemoveDimension = props => {
 };
 
 const App = () => {
-  // {0 : [50, dispatcher] ...}
+  // {0 : [50, 50, 50] ...}
   const [state, setState] = init(3, 2);
   return (
     <div className="container">
