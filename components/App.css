@@ -1,5 +1,6 @@
-.root {
-  --numSliders: 3;
+:root {
+  --rowNum: 2;
+  --colNum: 3;
 }
 .container {
  display: grid;
@@ -9,6 +10,8 @@
 }
 
 .table {
+    grid-template-columns: auto repeat(var(--colNum), auto);
+    grid-auto-flow: row;
     grid-column: 1;
     display: grid
 }

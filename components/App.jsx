@@ -5,6 +5,9 @@ import "./App.css";
 
 const deepCopy = arrayOfObj => JSON.parse(JSON.stringify(arrayOfObj));
 
+const updateCSS = (element, value) =>
+  document.documentElement.style.setProperty(element, value);
+
 const init = (numDimensions, numSamples) => {
   const samples = new Array(numSamples).fill(50).map((e, i) => {
     return { key: i, value: e };
@@ -74,6 +77,7 @@ const AddDimension = props => {
           return { key: index, value: e };
         })
     };
+    updateCSS("--colNum", Object.keys(newState).length);
     setState(newState);
   };
   return (
@@ -88,6 +92,7 @@ const RemoveDimension = props => {
   const handleClick = () => {
     const lastKey = Object.keys(state).slice(-1) || null;
     lastKey ? delete state[lastKey] : null;
+    updateCSS("--colNum", Object.keys(state).length);
     setState({ ...state });
   };
   return (
