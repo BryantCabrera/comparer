@@ -18,7 +18,7 @@ const init = (numDimensions, numSamples) => {
       .map(_ => deepCopy(samples)) // [[50, 50, 50], [...], [...]]
       .reduce((acc, vals, index) => {
         // {0: [50, 50], ...}
-        acc[index] = vals;
+        acc[`dimension ${index}`] = vals;
         return acc;
       }, {})
   );
@@ -71,7 +71,7 @@ const AddDimension = props => {
     const sampleArrayOfValues = Object.values(state)[0] || [];
     const newState = {
       ...state,
-      [Object.keys(state).length]: new Array(sampleArrayOfValues.length)
+      [`dimension ${Object.keys(state).length}`]: new Array(sampleArrayOfValues.length)
         .fill(50)
         .map((e, index) => {
           return { key: index, value: e };
