@@ -74,29 +74,34 @@ const MultiHandleSlider = props => {
   };
 
   return (
-    <Slider
-      rootStyle={sliderStyle}
-      step={1}
-      domain={[0, 100]}
-      values={values}
-      onSlideEnd={(vs, { activeHandleID }) => handleChange(vs, activeHandleID)}
-    >
-      <div style={railStyle} />
-      <Handles>
-        {/* handles and getHandleProps are supplied by Handles */}
-        {({ handles, getHandleProps }) => (
-          <div className="slider-handles">
-            {handles.map(handle => (
-              <Handle
-                key={handle.id}
-                handle={handle}
-                getHandleProps={getHandleProps}
-              />
-            ))}
-          </div>
-        )}
-      </Handles>
-    </Slider>
+    <Fragment>
+      <div> {stateKey} </div>
+      <Slider
+        rootStyle={sliderStyle}
+        step={1}
+        domain={[0, 100]}
+        values={values}
+        onSlideEnd={(vs, { activeHandleID }) =>
+          handleChange(vs, activeHandleID)
+        }
+      >
+        <div style={railStyle} />
+        <Handles>
+          {/* handles and getHandleProps are supplied by Handles */}
+          {({ handles, getHandleProps }) => (
+            <div className="slider-handles">
+              {handles.map(handle => (
+                <Handle
+                  key={handle.id}
+                  handle={handle}
+                  getHandleProps={getHandleProps}
+                />
+              ))}
+            </div>
+          )}
+        </Handles>
+      </Slider>
+    </Fragment>
   );
 };
 

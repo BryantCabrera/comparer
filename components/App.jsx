@@ -108,7 +108,7 @@ const App = () => {
   return (
     <div className="container">
       <Fragment>
-        <Table state={state} />
+        <Table state={state} setState={setState} />
         <div className="buttons-container">
           <AddSample state={state} setState={setState} />
           <RemoveSample state={state} setState={setState} />
