@@ -24,8 +24,11 @@ const init = (numDimensions, numSamples) => {
   );
 };
 
+const initRowNames = numSamples =>
+  useState(new Array(numSamples).fill("").map((_, index) => `Sample ${index}`));
+
 const AddSample = props => {
-  const { state, setState } = props;
+  const { state, setState, rowNames, setRowNames } = props;
   const handleClick = () => {
     const newState = {};
     Object.keys(state).forEach(key => {
@@ -34,6 +37,7 @@ const AddSample = props => {
       newState[key] = val;
     });
     setState(newState);
+    setRowNames([...rowNames].concat([`Sample ${rowNames.length}`]));
   };
   return (
     <button onClick={handleClick} className="buttons add-sample" type="button">
@@ -44,7 +48,7 @@ const AddSample = props => {
 };
 
 const RemoveSample = props => {
-  const { state, setState } = props;
+  const { state, setState, rowNames, setRowNames } = props;
   const handleClick = () => {
     const newState = {};
     Object.keys(state).forEach(key => {
@@ -52,6 +56,7 @@ const RemoveSample = props => {
       newState[key] = val;
     });
     setState(newState);
+    setRowNames(rowNames.slice(0, -1));
   };
   return (
     <button
@@ -71,7 +76,9 @@ const AddDimension = props => {
     const sampleArrayOfValues = Object.values(state)[0] || [];
     const newState = {
       ...state,
-      [`dimension ${Object.keys(state).length}`]: new Array(sampleArrayOfValues.length)
+      [`dimension ${Object.keys(state).length}`]: new Array(
+        sampleArrayOfValues.length
+      )
         .fill(50)
         .map((e, index) => {
           return { key: index, value: e };
@@ -105,17 +112,33 @@ const RemoveDimension = props => {
 const App = () => {
   // {0 : [50, 50, 50] ...}
   const [state, setState] = init(3, 2);
+  const [rowNames, setRowNames] = initRowNames(2);
   return (
     <div className="container">
       <Fragment>
-        <Table state={state} setState={setState} />
+        <Table
+          state={state}
+          setState={setState}
+          rowNames={rowNames}
+          setRowNames={setRowNames}
+        />
         <div className="buttons-container">
-          <AddSample state={state} setState={setState} />
-          <RemoveSample state={state} setState={setState} />
+          <AddSample
+            state={state}
+            setState={setState}
+            rowNames={rowNames}
+            setRowNames={setRowNames}
+          />
+          <RemoveSample
+            state={state}
+            setState={setState}
+            rowNames={rowNames}
+            setRowNames={setRowNames}
+          />
           <AddDimension state={state} setState={setState} />
           <RemoveDimension state={state} setState={setState} />
         </div>
-        <Sliders state={state} setState={setState} />
+        <Sliders state={state} setState={setState} rowNames={rowNames} />
       </Fragment>
     </div>
   );

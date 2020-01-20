@@ -1,16 +1,5 @@
 import React, { Fragment, useState } from "react";
 
-const Row = props => {
-  return (
-    <Fragment>
-      <div> {props.rowName} </div>
-      {props.rowValues.map((score, index) => (
-        <div key={index}> {score.value} </div>
-      ))}
-    </Fragment>
-  );
-};
-
 const transpose = columnWiseRows => {
   const rows = new Array(columnWiseRows[0].length);
   columnWiseRows.forEach(arr => {
@@ -20,10 +9,55 @@ const transpose = columnWiseRows => {
   });
   return rows;
 };
+
+const RowName = props => {
+  const { index, rowNames, setRowNames } = props;
+  const [state, setState] = useState(rowNames[index]);
+  const handleChange = e => setState(e.target.value);
+  const handleEnter = e => {
+    if (e.keyCode == 13) handleUpdate(e);
+  };
+  const handleUpdate = e => {
+    const newRowNames = [...rowNames];
+    newRowNames[index] = state;
+    setRowNames(newRowNames);
+  };
+  return (
+    <input
+      onChange={e => handleChange(e)}
+      onBlur={e => handleUpdate(e)}
+      onKeyUp={e => handleEnter(e)}
+      key={index}
+      value={state}
+      type="text"
+    />
+  );
+};
+
+const Row = props => {
+  const { rowNames, rowValues, rowIndex, setRowNames } = props;
+  return (
+    <Fragment>
+      <RowName rowNames={rowNames} index={rowIndex} setRowNames={setRowNames} />
+      {rowValues.map((score, index) => (
+        <div key={index}> {score.value} </div>
+      ))}
+    </Fragment>
+  );
+};
+
 const Rows = props => {
-  const rows = transpose(props.rows);
+  const { state, setState, rowNames, setRowNames } = props;
+  let rows = Object.values(state); // [value1, value2, ...]
+  rows = transpose(rows);
   return rows.map((row, index) => (
-    <Row key={index} rowName={`Sample ${index}`} rowValues={row} />
+    <Row
+      key={index}
+      rowIndex={index}
+      rowNames={rowNames}
+      setRowNames={setRowNames}
+      rowValues={row}
+    />
   ));
 };
 
@@ -31,20 +65,22 @@ const Column = props => {
   const [state, setState] = useState(props.name);
   const { index, name } = props;
   const handleChange = e => setState(e.target.value);
-  const handleEnter = e => {if(e.keyCode == 13) handleUpdate(e)}
-  const handleUpdate = (e) => {
-    const newState = {} 
-    Object.entries(props.parentState)
-      .forEach((keyValuePair, currIndex)=>{
-         let key = keyValuePair[0]
-         const value = keyValuePair[1]
-         if(currIndex == index-1){ // index-1 because the first column is an empty name one above the rows; readOnly
-           key = e.target.value
-         }
-         newState[key] = value
-      })
-    props.parentSetState(newState)
-  }
+  const handleEnter = e => {
+    if (e.keyCode == 13) handleUpdate(e);
+  };
+  const handleUpdate = e => {
+    const newState = {};
+    Object.entries(props.parentState).forEach((keyValuePair, currIndex) => {
+      let key = keyValuePair[0];
+      const value = keyValuePair[1];
+      if (currIndex == index - 1) {
+        // index-1 because the first column is an empty name one above the rows; readOnly
+        key = e.target.value;
+      }
+      newState[key] = value;
+    });
+    props.parentSetState(newState);
+  };
   return (
     <input
       onChange={e => handleChange(e)}
@@ -79,14 +115,17 @@ const Columns = props => {
 };
 
 const Table = props => {
-  const { state, setState } = props;
-
-  const rows = Object.values(state); // [value1, value2, ...]
+  const { state, setState, rowNames, setRowNames } = props;
   return (
     <div className="table">
       <Fragment>
         <Columns state={state} setState={setState} />
-        <Rows rows={rows} />
+        <Rows
+          state={state}
+          setState={setState}
+          rowNames={rowNames}
+          setRowNames={setRowNames}
+        />
       </Fragment>
     </div>
   );

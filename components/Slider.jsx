@@ -27,7 +27,11 @@ const railStyle = {
   backgroundColor: "#8B9CB6"
 };
 
-const Handle = ({ handle: { id, value, percent }, getHandleProps }) => {
+const Handle = ({
+  handle: { id, value, percent },
+  getHandleProps,
+  rowName
+}) => {
   return (
     <div
       style={{
@@ -48,14 +52,14 @@ const Handle = ({ handle: { id, value, percent }, getHandleProps }) => {
       {...getHandleProps(id)}
     >
       <div style={{ fontFamily: "Roboto", fontSize: 11, marginTop: -35 }}>
-        {value}
+        {rowName}
       </div>
     </div>
   );
 };
 
 const MultiHandleSlider = props => {
-  const { stateKey, state, setState } = props;
+  const { stateKey, state, setState, rowNames } = props;
   const values = state[stateKey];
 
   const handleChange = (newHandles, activeHandleID) => {
@@ -63,9 +67,7 @@ const MultiHandleSlider = props => {
 
     const newValues = values.map(h => {
       h.value =
-        h.key == updatedHandle.metadata.key
-          ? (h.value = updatedHandle.val)
-          : h.value;
+        h.key == updatedHandle.metadata.key ? updatedHandle.val : h.value;
       return h;
     });
     const newState = { ...state };
@@ -95,6 +97,7 @@ const MultiHandleSlider = props => {
                   key={handle.id}
                   handle={handle}
                   getHandleProps={getHandleProps}
+                  rowName={rowNames[handle.metadata.key]}
                 />
               ))}
             </div>
@@ -106,7 +109,7 @@ const MultiHandleSlider = props => {
 };
 
 const Sliders = props => {
-  const { state, setState } = props;
+  const { state, setState, rowNames } = props;
 
   return (
     <div className="sliders">
@@ -118,6 +121,7 @@ const Sliders = props => {
             stateKey={key}
             state={state}
             setState={setState}
+            rowNames={rowNames}
           />
         );
       })}
