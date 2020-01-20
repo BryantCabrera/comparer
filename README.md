@@ -1,5 +1,6 @@
 # Comparer 
 Visit: https://comparer.herokuapp.com/
+
 A React, Nextjs app for exploring your biases
 
 ## Motivation
