@@ -8,7 +8,7 @@ I usually lie to myself. I misunderstand situations. I have blind spots in my op
 amazing, it helps me explore my thoughts slowly and offloads the congnitive load of juggling many concepts at once. You can see your 
 arguments and arrange them and rearrange them.
 
-This app is a tool for exploration, like writing. By playing around with it one could gain a better understanding of their underlying biases. I will put up some examples soon. There are more details of the history in `project_documents`
+This app is a tool for exploration, like writing(and just like writing, I have not build this with a mobile screen in mind). By playing around with it one could gain a better understanding of their underlying biases. I will put up some examples soon. There are more details of the history in `project_documents`
 
 ## Setup
 
