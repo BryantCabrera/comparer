@@ -18,15 +18,6 @@ const sliderStyle = {
   height: 80
 };
 
-const railStyle = {
-  position: "absolute",
-  width: "100%",
-  height: 10,
-  marginTop: 35,
-  borderRadius: 5,
-  backgroundColor: "#8B9CB6"
-};
-
 const Handle = ({
   handle: { id, value, percent },
   getHandleProps,
@@ -34,24 +25,13 @@ const Handle = ({
 }) => {
   return (
     <div
+      className='handle'
       style={{
         left: `${percent}%`,
-        position: "absolute",
-        marginLeft: -15,
-        marginTop: 25,
-        zIndex: 2,
-        width: 30,
-        height: 30,
-        border: 0,
-        textAlign: "center",
-        cursor: "pointer",
-        borderRadius: "50%",
-        backgroundColor: "#2C4870",
-        color: "#333"
       }}
       {...getHandleProps(id)}
     >
-      <div style={{ fontFamily: "Roboto", fontSize: 11, marginTop: -35 }}>
+      <div className='handleLabel'>
         {rowName}
       </div>
     </div>
@@ -77,7 +57,7 @@ const MultiHandleSlider = props => {
 
   return (
     <Fragment>
-      <div> {stateKey} </div>
+      <div className='sliderLabel'> {stateKey} </div>
       <Slider
         rootStyle={sliderStyle}
         step={1}
@@ -87,7 +67,7 @@ const MultiHandleSlider = props => {
           handleChange(vs, activeHandleID)
         }
       >
-        <div style={railStyle} />
+        <div className="rail" />
         <Handles>
           {/* handles and getHandleProps are supplied by Handles */}
           {({ handles, getHandleProps }) => (

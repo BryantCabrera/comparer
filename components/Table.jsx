@@ -23,6 +23,7 @@ const RowName = props => {
     setRowNames(newRowNames);
   };
   return (
+    <div className="rowNameWrapper">
     <input
       className="rowName"
       onChange={e => handleChange(e)}
@@ -32,6 +33,7 @@ const RowName = props => {
       value={state}
       type="text"
     />
+    </div>
   );
 };
 
@@ -41,10 +43,7 @@ const Row = props => {
     <Fragment>
       <RowName rowNames={rowNames} index={rowIndex} setRowNames={setRowNames} />
       {rowValues.map((score, index) => (
-        <div key={index} className="cell">
-          {" "}
-          {score.value}{" "}
-        </div>
+        <div key={index} className="cell">{score.value}</div>
       ))}
     </Fragment>
   );
@@ -86,6 +85,7 @@ const Column = props => {
     props.parentSetState(newState);
   };
   return (
+    <div className="columnHeaderWrapper">
     <input
       className="columnHeader"
       onChange={e => handleChange(e)}
@@ -96,6 +96,7 @@ const Column = props => {
       value={state}
       type="text"
     />
+    </div>
   );
 };
 

@@ -5,30 +5,60 @@
 
 .container {
  display: grid;
- grid-template-columns: 50% 50%;
- grid-template-rows: auto 40px;
- font-family: roboto;
+ grid-template-columns: 49% 2% 49%;
+ grid-template-rows: 120px auto 40px;
+ font-family: lora;
 }
 
 .table {
     grid-template-columns: 100px repeat(var(--colNum), auto);
-    grid-auto-flow: row;
     grid-column: 1;
+    grid-row: 2;
     display: grid;
 }
 
 .columnHeader {
+  overflow: hidden;
+  font-variant: small-caps;
+  font-size: calc(100% - 2px);
+  border: none;
+  padding-left: 5px;
+}
+
+.columnHeaderWrapper {
   overflow: hidden
 }
 
+.cell {
+  font-size: calc(100% - 2px);
+  overflow: hidden;
+  border: none;
+  padding-left: 5px;
+  color: grey;
+}
+
+.handleLabel {
+    font-size: 13px; 
+    margin-top: -35px;
+    margin-left: -15px;
+    width: 60px;
+    color: grey;
+}
+
 .rowName {
-  overflow: hidden
+  overflow: hidden;
+  font-size: calc(100% - 2px);
+  border: none;
 } 
 
+.rowNameWrapper {
+  overflow: hidden
+}
+
 .sliders {
-    grid-column:2;
-    grid-row-start: 1;
-    grid-row-end: 2;
+    grid-column:3;
+    grid-row-start: 2;
+    grid-row-end: 3;
     grid-template-columns: 1;
     display: grid;
 }
@@ -37,18 +67,33 @@
   grid-column: 1;
 }
 
+.sliderLabel {
+    font-size: 15px;
+    font-variant: small-caps; 
+    color: grey;
+}
+
 .buttons-container {
    display: grid;
    grid-column: 1;
-   grid-row: 2;
+   grid-row: 3;
    grid-template-columns: 4;
    grid-template-rows: 1;
 }
 
 .buttons {
-  background: white;
-  font-family: roboto;
-  font-size: 14px
+  background-color: white;
+  color: black;
+  border-color: #2C4870;
+  border-radius: 10%;
+  margin: 2px;
+  font-size: 14px;
+  height: 40px;
+}
+
+.download {
+  background-color: #2C4870;
+  color: white;
 }
 
 .add-sample {
@@ -67,8 +112,41 @@
   grid-column: 4
 }
 
+
+.handle {
+    position: absolute;
+    margin-left: -15px;
+    margin-top: 28px;
+    z-index: 2;
+    width: 15px;
+    height: 15px;
+    border: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #2C4870;
+    color: #333
+}
+
+.rail {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  margin-top: 35px;
+  border-radius: 15px;
+  background-color: #024653;
+}
+
+.title {
+  text-align: center;
+  font-size: 70px;
+  color: #024653;
+}
+
+
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Lora', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -80,6 +158,10 @@ code {
     monospace;
 }
 
+* {font-family: lora}
+
+
+/*
 * { background-color: rgba(255,0,0,.2); }
 * * { background-color: rgba(0,255,0,.2); }
 * * * { background-color: rgba(0,0,255,.2); }
@@ -89,3 +171,4 @@ code {
 * * * * * * * { background-color: rgba(255,0,0,.2); }
 * * * * * * * * { background-color: rgba(0,255,0,.2); }
 * * * * * * * * * { background-color: rgba(0,0,255,.2); }
+*/

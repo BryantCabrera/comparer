@@ -109,11 +109,20 @@ const RemoveDimension = props => {
   );
 };
 
+const DownloadCSV = props => {
+    return (
+      <button className="buttons download">Download CSV</button>
+    )
+
+}
+
 const App = () => {
   // {0 : [50, 50, 50] ...}
   const [state, setState] = init(3, 2);
   const [rowNames, setRowNames] = initRowNames(2);
   return (
+    <Fragment>
+    <p className="title">The Comparer App - Decide Better</p> 
     <div className="container">
       <Fragment>
         <Table
@@ -137,10 +146,12 @@ const App = () => {
           />
           <AddDimension state={state} setState={setState} />
           <RemoveDimension state={state} setState={setState} />
+          <DownloadCSV state={state} rowNames={rowNames}/> 
         </div>
         <Sliders state={state} setState={setState} rowNames={rowNames} />
       </Fragment>
     </div>
+    </Fragment>
   );
 };
 
