@@ -12,10 +12,18 @@
 
 .table {
     grid-template-columns: 100px repeat(var(--colNum), auto);
-    grid-template-rows: repeat(var(--rowNum), 50px);
+    grid-auto-flow: row;
     grid-column: 1;
     display: grid;
 }
+
+.columnHeader {
+  overflow: hidden
+}
+
+.rowName {
+  overflow: hidden
+} 
 
 .sliders {
     grid-column:2;
