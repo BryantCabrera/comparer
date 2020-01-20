@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 
 const transpose = columnWiseRows => {
-  const rows = new Array(columnWiseRows[0].length);
+  const rows = new Array((columnWiseRows[0] || []).length);
   columnWiseRows.forEach(arr => {
     arr.forEach((obj, index) => {
       rows[index] ? rows[index].push(obj) : (rows[index] = [obj]);

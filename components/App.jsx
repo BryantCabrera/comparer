@@ -73,13 +73,13 @@ const RemoveSample = props => {
 };
 
 const AddDimension = props => {
-  const { state, setState } = props;
+  const { state, setState, setRowNames, rowNames } = props;
   const handleClick = () => {
     const sampleArrayOfValues = Object.values(state)[0] || [];
     const newState = {
       ...state,
       [`dimension ${Object.keys(state).length}`]: new Array(
-        sampleArrayOfValues.length
+        sampleArrayOfValues.length || 1
       )
         .fill(50)
         .map((e, index) => {
@@ -87,6 +87,9 @@ const AddDimension = props => {
         })
     };
     updateCSS("--colNum", Object.keys(newState).length);
+    // edge case, when all dimensions have been removed and a new dimension is being added, we need to add
+    // a sample name
+    if (rowNames.length == 0) setRowNames(["Sample 0"]);
     setState(newState);
   };
   return (
@@ -97,10 +100,11 @@ const AddDimension = props => {
 };
 
 const RemoveDimension = props => {
-  const { state, setState } = props;
+  const { state, setRowNames, setState } = props;
   const handleClick = () => {
     const lastKey = Object.keys(state).slice(-1) || null;
     lastKey ? delete state[lastKey] : null;
+    if (Object.keys(state).length === 0) setRowNames([]); // if this is the last dimension, also remove all samples
     updateCSS("--colNum", Object.keys(state).length);
     setState({ ...state });
   };
@@ -169,8 +173,17 @@ const App = () => {
               rowNames={rowNames}
               setRowNames={setRowNames}
             />
-            <AddDimension state={state} setState={setState} />
-            <RemoveDimension state={state} setState={setState} />
+            <AddDimension
+              state={state}
+              setState={setState}
+              setRowNames={setRowNames}
+              rowNames={rowNames}
+            />
+            <RemoveDimension
+              state={state}
+              setState={setState}
+              setRowNames={setRowNames}
+            />
             <DownloadCSV state={state} rowNames={rowNames} />
           </div>
           <Sliders state={state} setState={setState} rowNames={rowNames} />
