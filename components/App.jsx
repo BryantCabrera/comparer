@@ -1,4 +1,6 @@
 import React, { Fragment, useState } from "react";
+import { CSVLink } from "react-csv";
+
 import Sliders from "./Slider";
 import Table from "./Table";
 import "./App.css";
@@ -110,11 +112,34 @@ const RemoveDimension = props => {
 };
 
 const DownloadCSV = props => {
-    return (
-      <button className="buttons download">Download CSV</button>
-    )
+  const csvData = [];
+  const { rowNames, state } = props;
+  const colNames = Object.keys(state);
+  const headers = ["name", ...colNames];
+  csvData.push(headers);
 
-}
+  rowNames.forEach((rowName, index) => {
+    let row = [rowName];
+    colNames.forEach(cname => {
+      row.push(state[cname][index]["value"]);
+    });
+    csvData.push(row);
+  });
+
+  return (
+    <button className="buttons download">
+      {
+        <CSVLink
+          className="download"
+          data={csvData}
+          filename={"comparer-io.csv"}
+        >
+          Download CSV
+        </CSVLink>
+      }
+    </button>
+  );
+};
 
 const App = () => {
   // {0 : [50, 50, 50] ...}
@@ -122,35 +147,35 @@ const App = () => {
   const [rowNames, setRowNames] = initRowNames(2);
   return (
     <Fragment>
-    <p className="title">The Comparer App - Decide Better</p> 
-    <div className="container">
-      <Fragment>
-        <Table
-          state={state}
-          setState={setState}
-          rowNames={rowNames}
-          setRowNames={setRowNames}
-        />
-        <div className="buttons-container">
-          <AddSample
+      <p className="title">The Comparer App - Decide Better</p>
+      <div className="container">
+        <Fragment>
+          <Table
             state={state}
             setState={setState}
             rowNames={rowNames}
             setRowNames={setRowNames}
           />
-          <RemoveSample
-            state={state}
-            setState={setState}
-            rowNames={rowNames}
-            setRowNames={setRowNames}
-          />
-          <AddDimension state={state} setState={setState} />
-          <RemoveDimension state={state} setState={setState} />
-          <DownloadCSV state={state} rowNames={rowNames}/> 
-        </div>
-        <Sliders state={state} setState={setState} rowNames={rowNames} />
-      </Fragment>
-    </div>
+          <div className="buttons-container">
+            <AddSample
+              state={state}
+              setState={setState}
+              rowNames={rowNames}
+              setRowNames={setRowNames}
+            />
+            <RemoveSample
+              state={state}
+              setState={setState}
+              rowNames={rowNames}
+              setRowNames={setRowNames}
+            />
+            <AddDimension state={state} setState={setState} />
+            <RemoveDimension state={state} setState={setState} />
+            <DownloadCSV state={state} rowNames={rowNames} />
+          </div>
+          <Sliders state={state} setState={setState} rowNames={rowNames} />
+        </Fragment>
+      </div>
     </Fragment>
   );
 };

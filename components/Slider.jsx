@@ -25,15 +25,13 @@ const Handle = ({
 }) => {
   return (
     <div
-      className='handle'
+      className="handle"
       style={{
-        left: `${percent}%`,
+        left: `${percent}%`
       }}
       {...getHandleProps(id)}
     >
-      <div className='handleLabel'>
-        {rowName}
-      </div>
+      <div className="handleLabel">{rowName}</div>
     </div>
   );
 };
@@ -57,7 +55,7 @@ const MultiHandleSlider = props => {
 
   return (
     <Fragment>
-      <div className='sliderLabel'> {stateKey} </div>
+      <div className="sliderLabel"> {stateKey} </div>
       <Slider
         rootStyle={sliderStyle}
         step={1}
