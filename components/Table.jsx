@@ -23,14 +23,15 @@ const RowName = props => {
     setRowNames(newRowNames);
   };
   return (
-    <input
-      onChange={e => handleChange(e)}
-      onBlur={e => handleUpdate(e)}
-      onKeyUp={e => handleEnter(e)}
-      key={index}
-      value={state}
-      type="text"
-    />
+      <input
+        className='rowName'
+        onChange={e => handleChange(e)}
+        onBlur={e => handleUpdate(e)}
+        onKeyUp={e => handleEnter(e)}
+        key={index}
+        value={state}
+        type="text"
+      />
   );
 };
 
@@ -40,7 +41,7 @@ const Row = props => {
     <Fragment>
       <RowName rowNames={rowNames} index={rowIndex} setRowNames={setRowNames} />
       {rowValues.map((score, index) => (
-        <div key={index}> {score.value} </div>
+        <div key={index} className="cell"> {score.value} </div>
       ))}
     </Fragment>
   );
@@ -82,15 +83,16 @@ const Column = props => {
     props.parentSetState(newState);
   };
   return (
-    <input
-      onChange={e => handleChange(e)}
-      onBlur={e => handleUpdate(e)}
-      onKeyUp={e => handleEnter(e)}
-      readOnly={index == 0 ? true : false}
-      key={index}
-      value={state}
-      type="text"
-    />
+      <input
+        className='ColumnHeader'
+        onChange={e => handleChange(e)}
+        onBlur={e => handleUpdate(e)}
+        onKeyUp={e => handleEnter(e)}
+        readOnly={index == 0 ? true : false}
+        key={index}
+        value={state}
+        type="text"
+      />
   );
 };
 

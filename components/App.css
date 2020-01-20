@@ -2,18 +2,19 @@
   --rowNum: 2;
   --colNum: 3;
 }
+
 .container {
  display: grid;
  grid-template-columns: 50% 50%;
- grid-template-rows: 90% 10%;
- font-family: roboto
+ grid-template-rows: auto 40px;
+ font-family: roboto;
 }
 
 .table {
-    grid-template-columns: auto repeat(var(--colNum), auto);
-    grid-auto-flow: row;
+    grid-template-columns: 100px repeat(var(--colNum), auto);
+    grid-template-rows: repeat(var(--rowNum), 50px);
     grid-column: 1;
-    display: grid
+    display: grid;
 }
 
 .sliders {
@@ -59,7 +60,6 @@
 }
 
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
