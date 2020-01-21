@@ -4,13 +4,13 @@
 }
 
 html {
-	font-size: 62.5%;
+	font-size: 100%;
 }
 
 .container {
 	display: grid;
 	grid-template-columns: 49% 2% 49%;
-	grid-template-rows: 120px auto 40px;
+	grid-template-rows: 12rem auto 4rem;
 	font-family: lora;
 }
 
@@ -24,7 +24,7 @@ html {
 .columnHeader {
 	overflow: hidden;
 	font-variant: small-caps;
-	font-size: calc(100% - 2px);
+	font-size: calc(100% - 0.2rem);
 	border: none;
 	padding-left: 5px;
 }
@@ -34,7 +34,7 @@ html {
 }
 
 .cell {
-	font-size: calc(100% - 2px);
+	font-size: calc(100% - 0.2rem);
 	overflow: hidden;
 	border: none;
 	padding-left: 5px;
@@ -51,7 +51,7 @@ html {
 
 .rowName {
 	overflow: hidden;
-	font-size: calc(100% - 2px);
+	font-size: calc(100% - 0.2rem);
 	border: none;
 }
 
