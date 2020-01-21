@@ -9,7 +9,7 @@ intimacy et cetera.
 
 The plan was to assign a score to each row's column. But I soon realize that I assigning scores on an arbitrary scale is 
 somewhat difficult on a spreadsheet: I need to keep adjusting different rows column-value everytime my opinion changes. I 
-realized it is way easier for me to qualitatively say which is better by how much, than to quantitavly assigning scores to them.
+realized it is way easier for me to qualitatively say which is better by how much, than to quantitatively assigning scores to them.
 
 This is a bigger problem when I wanted to explore a new dimension to see how that works. Then I needed to go through the ordeal again.
 
@@ -21,7 +21,7 @@ I also thought about fancy stuff like dynamic radar charts. But TBD.
 ## What
 
 As a user, I need to be able to compare multiple data points of a kind across an arbitrary number of dimensions qualitatvily
-and be able to view the result quantitavely.
+and be able to view the result quantitatively.
 
 The approach I have decided to take, is to start with a table of a single sample and a single dimension. There will also 
 be a slider somewhere on the page. The slider is titled after the dimension. The slider has a dial which is positioned on
@@ -69,5 +69,5 @@ Implement the ability to add and remove dimensions
 ## Future work
 
 A dynamic radar chart for this will be super cool. If after a while, a user can lock down the dimensions they are looking for in the
-class of objects under investigation, then they can get visual idea of what a fit or unfit looks like, sort of like a constlation or
+class of objects under investigation, then they can get visual idea of what a fit or unfit looks like, sort of like a constelation or
 symbol for that thing.
