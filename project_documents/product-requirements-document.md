@@ -8,10 +8,10 @@ as rows and the dimensions that I cared about as columns, things like common int
 intimacy et cetera. 
 
 The plan was to assign a score to each row's column. But I soon realize that I assigning scores on an arbitrary scale is 
-somewhat difficult on a spreadsheet: I need to keep adjusting different rows column valu everytime my opinion changes. I 
-realized it is way easier for me to qualitatively say which is better by how much, than to quantitavly assing scores to them.
+somewhat difficult on a spreadsheet: I need to keep adjusting different rows column-value everytime my opinion changes. I 
+realized it is way easier for me to qualitatively say which is better by how much, than to quantitavly assigning scores to them.
 
-This is a bigger problem when I wanted to explore a new dimension to see how that works. Then I needed to go via the ordeal again.
+This is a bigger problem when I wanted to explore a new dimension to see how that works. Then I needed to go through the ordeal again.
 
 So I imagined that it would be very nice to have a tool, that will allow me to do that: compare multiple data points of a kind
 across an arbitrary number of dimension qualitatively, and then report back the numbers.
